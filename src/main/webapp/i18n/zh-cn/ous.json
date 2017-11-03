@@ -1,0 +1,11 @@
+{
+    "ous": {
+        "title": "社区开放帐号",
+        "nbopenUsers": "现有 {{ total }}个 开放帐号.",
+        "filter": "Filter",
+        "table": {
+            "openId": "Open Id",
+            "nickName": "昵称"
+        }
+    }
+}

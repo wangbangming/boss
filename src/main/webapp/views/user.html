@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="well with-header">
+                    <div class="header bordered-pink">所有后台用户</div>
+                    <div class="buttons-preview">
+                        <div ng-controller="UserCtrl">
+
+                            <h5 class="text-right">
+                                <button class="btn btn-default" ng-click="open('','saveOrUpdateModalContent.html', 'add')">注册后台用户</button>
+                                <button class="btn btn-default" ng-click="open('','saveOrUpdateModalContent.html', 'edit')">编辑后台用户</button>
+                                <button class="btn btn-default" ng-click="removeLine()">删除后台用户</button>
+                                <button class="btn btn-default" ng-click="openAuthority('','authorityModalContent.html')">角色分配</button>
+                            </h5>
+
+                            <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection class="grid"></div>
+
+                            <script type="text/ng-template" id="saveOrUpdateModalContent.html">
+								<form name="form" class="form-horizontal" novalidate>
+                                	<div class="modal-header">
+                                    	<h3 class="modal-title">{{modalTitle}}</h3>
+                                	</div>
+                                	<div class="modal-body">
+
+                                        <div class="form-group">
+                                            <label for="inputText1" class="col-sm-2 control-label no-padding-right">账号</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" required class="form-control" id="inputText1" ng-model="user.account"
+													ng-minlength="3" ng-maxlength="15" placeholder="合法的账号" name="account" my-focus ensure-unique="account" ensure-unique-data="user">
+                                                <p class="help-block">3至15个字符</p>
+
+												<div ng-show="form.account.$invalid && (!form.account.$focused || form.submitted)">
+													<small ng-show="form.account.$error.required">
+															<font color="#FF0000">account is required</font>
+													</small>
+													<small ng-show="form.account.$error.minlength">
+															<font color="#FF0000">account is required to be at least 3 characters</font>
+													</small>
+													<small ng-show="form.account.$error.maxlength">
+															<font color="#FF0000">account cannot be longer than 15 characters</font>
+													</small>
+													<small ng-show="form.account.$error.unique">
+															<font color="#FF0000">That account is taken, please try another</font>
+													</small>
+												</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText2" class="col-sm-2 control-label no-padding-right">用户名</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" required class="form-control" id="inputText2" ng-model="user.userName"
+													ng-minlength="2" ng-maxlength="15" placeholder="合法的用户名" name="userName" my-focus>
+                                                <p class="help-block">2至15个字符</p>
+
+												<div ng-show="form.userName.$invalid && (!form.userName.$focused || form.submitted)">
+													<small ng-show="form.userName.$error.required">
+															<font color="#FF0000">userName is required</font>
+													</small>
+													<small ng-show="form.userName.$error.minlength">
+															<font color="#FF0000">userName is required to be at least 2 characters</font>
+													</small>
+													<small ng-show="form.userName.$error.maxlength">
+															<font color="#FF0000">userName cannot be longer than 15 characters</font>
+													</small>
+												</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-if="showPassword">
+                                            <label for="inputText3" class="col-sm-2 control-label no-padding-right">密码</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" required class="form-control" id="inputText3" ng-model="user.password"
+                                                    ng-pattern="/^[A-Za-z0-9_]{6,16}$/" placeholder="密码" name="password" my-focus>
+                                                <p class="help-block">6到16位数字，大小写字母或下划线</p>
+
+												<div ng-show="form.password.$invalid && (!form.password.$focused || form.submitted)">
+													<small>
+														<font color="#FF0000">password is required/not valid</font>
+													</small>
+												</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText4" class="col-sm-2 control-label no-padding-right">手机号</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText4" ng-model="user.mobilePhone"
+                                                    ng-pattern="/^1\d{10}$/" placeholder="手机号" name="mobilePhone" my-focus>
+                                                <p class="help-block">合法的11位手机号</p>
+
+												<div ng-show="form.mobilePhone.$dirty && form.mobilePhone.$invalid && !form.mobilePhone.$focused">
+													<small>
+														<font color="#FF0000">mobilePhone is not valid</font>
+													</small>
+												</div>
+                                            </div>
+                                        </div>
+
+										<div class="form-group">
+                                            <label for="inputText5" class="col-sm-2 control-label no-padding-right">办公电话</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText5" ng-model="user.officePhone"
+                                                    ng-pattern="/^((0\d{2,3})-)(\d{7,8})(-(\d{3,4}))?$/" placeholder="电话" name="officePhone" my-focus>
+                                                <p class="help-block">区号-电话号码-分机号</p>
+
+												<div ng-show="form.officePhone.$dirty && form.officePhone.$invalid && !form.officePhone.$focused">
+													<small>
+														<font color="#FF0000">officePhone is not valid</font>
+													</small>
+												</div>
+                                            </div>
+                                        </div>
+
+										<div class="form-group">
+                                            <label for="inputText6" class="col-sm-2 control-label no-padding-right">邮箱</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="inputText6" ng-model="user.email"
+                                                	ng-maxlength="20" placeholder="邮箱" name="email" my-focus>
+                                                <p class="help-block">带@的Email地址</p>
+
+												<div ng-show="form.email.$dirty && form.email.$invalid && !form.email.$focused">
+													<small ng-show="form.email.$error.email">
+														<font color="#FF0000">That is not a valid email. Please input a valid email</font>
+													</small>
+													<small ng-show="form.email.$error.maxlength">
+														<font color="#FF0000">email cannot be longer than 20 characters</font>
+													</small>
+												</div>
+                                            </div>
+                                        </div>
+                                	</div>
+                                	<div class="modal-footer">
+                                    	<button class="btn btn-blue" ng-click="ok()" ng-bind="modalAction">保存</button>
+                                    	<button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                	</div>
+								</form>
+                            </script>
+							
+							<script type="text/ng-template" id="authorityModalContent.html">
+								<div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+								<div class="modal-body">
+
+									<div left-right-select current-entity="currentRoles" current-exclude-entity="currentRolesExclude" entity-show="roleName" entity-value="roleCode"/>
+								</div>
+								<div class="modal-footer">
+                                    <button class="btn btn-blue" ng-click="ok()">保存</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+							</script>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

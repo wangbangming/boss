@@ -1,0 +1,157 @@
+﻿<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="well with-header">
+                    <div class="header bordered-pink">保养计划</div>
+                    <div class="buttons-preview">
+                        <div ng-controller="MaintainPlanCtrl">
+
+                            <h5 class="text-right">
+								<button class="btn btn-default" ng-click="getModelList()">获取车型信息</button>
+								
+                                <button class="btn btn-default" ng-click="open('','addContent.html', 'add')">新建保养计划</button>
+                                <button class="btn btn-default" ng-click="open('','editContent.html', 'edit')">编辑保养计划</button>
+                                <button class="btn btn-default" ng-click="remove()">删除保养计划</button>
+
+								<button class="btn btn-default" ng-click="showComponent('','maintainComponent.html','show')">维护保养配件</button>
+								
+                                <!--<button class="btn btn-default" ng-click="open('','editContent.html', 'edit')">新建保养计划</button>-->
+                                <!--<button class="btn btn-default" ng-click="removeLine()" check-button-auth="/rest/suppliers">删除供应商</button>-->
+
+                                <select ng-model="vehicleModel" ng-options="vehicleModel.brandName+vehicleModel.series+vehicleModel.model for vehicleModel in vehicleModels">
+                                    <option value="">Choose Model</option>
+                                </select>
+                                <!--<button ng-if="supplierCurrentStatus==0" class="btn btn-default" ng-click="active()">激活</button>-->
+                                <!--<button ng-if="supplierCurrentStatus==1" class="btn btn-default" ng-click="lock()">锁定</button>-->
+                                <button class="btn btn-default" ng-click="search('1',vehicleModel.vehicleModelId)">查询</button>
+                                <!--<button class="btn btn-default" ng-click="open('','myModalContent.html', 'add')">注册供应商</button>-->
+                                <!--<button class="btn btn-default" ng-click="open('','myModalContent.html', 'edit')">编辑供应商</button>-->
+                                <!--<button class="btn btn-default" ng-click="removeLine()" check-button-auth="/rest/suppliers">删除供应商</button>-->
+                            </h5>
+
+                            <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection class="grid"></div>
+
+                            <script type="text/ng-template" id="addContent.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form class="form-horizontal" role="form">
+
+                                        <div class="form-group">
+                                            <label for="inputText1" class="col-sm-2 control-label no-padding-right">保养计划名称</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText1" ng-model="maintainPlan.planName">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText2" class="col-sm-2 control-label no-padding-right">推荐保养里程</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText2" ng-model="maintainPlan.maintainMileage">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText3" class="col-sm-2 control-label no-padding-right">推荐保养时间</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText3" ng-model="maintainPlan.maintainTime">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText4" class="col-sm-2 control-label no-padding-right">适配车型</label>
+                                            <div class="col-sm-10">
+
+                                                <select id="inputText4" ng-model="vehicleModel" ng-options="vehicleModel.brandName+vehicleModel.series+vehicleModel.model for vehicleModel in vehicleModels">
+                                                    <option value="">Choose Model</option>
+                                                </select>
+                                                <!--<p class="help-block">带区号的座机号码或手机号码</p>-->
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-blue" ng-click="ok()" ng-bind="modalAction">保存</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+                            </script>
+                            <script type="text/ng-template" id="editContent.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form class="form-horizontal" role="form">
+
+                                        <div class="form-group">
+                                            <label for="inputText5" class="col-sm-2 control-label no-padding-right">保养计划名称</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText5" ng-model="maintainPlan.planName">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText6" class="col-sm-2 control-label no-padding-right">推荐保养里程</label>
+                                            <div class="col-sm-10">
+                                                <input type="number" class="form-control" id="inputText6" ng-model="maintainPlan.maintainMileage">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText7" class="col-sm-2 control-label no-padding-right">推荐保养时间</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText7" ng-model="maintainPlan.maintainTime">
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-blue" ng-click="ok()" ng-bind="modalAction">保存</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+                            </script>
+                            
+                            <script type="text/ng-template" id="maintainComponent.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+<BR>
+								<div class="form-group">
+									<label for="inputText1" class="col-sm-1 control-label no-padding-right">配件代码</label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="inputText8" ng-model="code" placeholder="配件代码">
+										</div>							
+									<label for="inputText1" class="col-sm-1 control-label no-padding-right">配件名称</label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="inputText9" ng-model="name" placeholder="配件名称">
+										</div>
+                               	</div>
+<BR>
+ 								<div class="modal-body">
+									
+                                    <div ui-grid="gridComponent" ui-grid-pagination ui-grid-selection class="grid"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" ng-click="addComponent()">添加配件</button>
+                                    <button class="btn btn-default" ng-click="removeComponent()">删除配件</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

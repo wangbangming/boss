@@ -1,0 +1,26 @@
+'use strict';
+
+angular.module('myApp')
+    .config(function ($stateProvider) {
+        var MT = 'myApp - config - $stateProvider.state finishReset ... '; c.log(MT);
+        $stateProvider
+            .state('finishReset', {
+                parent: 'account',
+                url: '/reset/finish?key',
+                data: {
+                    roles: []
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/account/reset/finish/reset.finish.html',
+                        controller: 'ResetFinishController'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('reset');
+                        return $translate.refresh();
+                    }]
+                }
+            });
+    });

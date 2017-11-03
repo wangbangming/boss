@@ -1,0 +1,275 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="well with-header">
+                    <div class="header bordered-pink">配件管理</div>
+                    <div class="buttons-preview">
+                        <div ng-controller="ComponentCtrl">
+
+                            <h5 class="text-right">
+
+                                <button class="btn btn-default" ng-click="open('','addContent.html', 'add')">新建保养配件</button>
+                                <button class="btn btn-default" ng-click="open('','editContent.html', 'edit')">编辑保养配件</button>
+                                <button class="btn btn-default" ng-click="remove()">删除保养配件</button>
+                                <button class="btn btn-default" ng-click="showComponent('','addComponent.html', 'show')">添加匹配零件</button>
+                                <button class="btn btn-default" ng-click="show('','showDimension.html', 'show')">查看关联维度</button>
+                                <select ng-model="vehicleModel" ng-options="vehicleModel.brandName+vehicleModel.series+vehicleModel.model for vehicleModel in vehicleModels">
+                                    <option value="">Choose Model</option>
+                                </select>
+                                <button class="btn btn-default" ng-click="search('0',vehicleModel.vehicleModelId)">查询</button>
+
+                            </h5>
+
+                            <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection class="grid"></div>
+
+                            <script type="text/ng-template" id="addContent.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form class="form-horizontal" role="form">
+
+                                        <div class="form-group">
+                                            <label for="inputText1" class="col-sm-2 control-label no-padding-right">保养配件名称</label>
+                                            <div class="col-sm-10">
+                                                <select ng-model="component" ng-options="component.componentCode+ '-' +component.componentName for component in components" id="inputText1" >
+                                                    <option value="">Choose Component</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputText21" class="col-sm-2 control-label no-padding-right">配件类型</label>
+                                            <div class="col-sm-10">
+                                                <select  ng-model="maintainPlan.componentType" ng-options="componentType for componentType in componentTypes" id="inputText21" >
+                                                    <option value="">Choose Type</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText2" class="col-sm-2 control-label no-padding-right">推荐保养里程</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText2" ng-model="maintainPlan.maintainMileage">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText3" class="col-sm-2 control-label no-padding-right">推荐保养时间</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText3" ng-model="maintainPlan.maintainTime">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText4" class="col-sm-2 control-label no-padding-right">适配车型</label>
+                                            <div class="col-sm-10">
+
+                                                <select id="inputText4" ng-model="vehicleModel" ng-options="vehicleModel.brandName+vehicleModel.series+vehicleModel.model for vehicleModel in vehicleModels">
+                                                    <option value="">Choose Model</option>
+                                                </select>
+                                                <!--<p class="help-block">带区号的座机号码或手机号码</p>-->
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-blue" ng-click="ok()" ng-bind="modalAction">保存</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+                            </script>
+                            <script type="text/ng-template" id="editContent.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form class="form-horizontal" role="form">
+
+                                        <div class="form-group">
+                                            <label for="inputText5" class="col-sm-2 control-label no-padding-right">保养配件名称</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText5" ng-model="maintainPlan.code+'-'+maintainPlan.planName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputText22" class="col-sm-2 control-label no-padding-right">配件类型</label>
+                                            <div class="col-sm-10">
+                                                <select  ng-model="maintainPlan.componentType" ng-options="componentType for componentType in componentTypes" id="inputText22" >
+                                                    <option value="">Choose Type</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputText6" class="col-sm-2 control-label no-padding-right">推荐保养里程</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText6" ng-model="maintainPlan.maintainMileage">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText7" class="col-sm-2 control-label no-padding-right">推荐保养时间</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText7" ng-model="maintainPlan.maintainTime">
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-blue" ng-click="ok()" ng-bind="modalAction">保存</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+                            </script>
+
+
+                            <script type="text/ng-template" id="showDimension.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div ui-grid="gridDimensionWeight" ui-grid-pagination ui-grid-selection class="grid"></div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" ng-click="open('','addDimension.html', 'add')">新增关联维度</button>
+                                    <button class="btn btn-default" ng-click="open('','editDimension.html', 'edit')">编辑关联维度</button>
+                                    <button class="btn btn-default" ng-click="remove()">删除关联维度</button>
+
+                                    <button class="btn btn-default" ng-click="show('','showDimensionRatio.html','')">查看加权系数</button>
+
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+
+                            </script>
+
+
+                            <script type="text/ng-template" id="addDimension.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label for="inputText12" class="col-sm-2 control-label no-padding-right">维度</label>
+                                            <div class="col-sm-10">
+
+                                                <select id="inputText12" ng-model="dimension" ng-options="dimension.dimensionName for dimension in dimensions">
+                                                    <option value="">Choose Dimension</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label for="inputText11" class="col-sm-2 control-label no-padding-right">权重</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText11" ng-model="dimensionWeight.weight">
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-blue" ng-click="ok()">保存</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+                            </script>
+                            <script type="text/ng-template" id="editDimension.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label for="inputText13" class="col-sm-2 control-label no-padding-right">权重</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputText13" ng-model="dimensionWeight.weight">
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-blue" ng-click="ok()">保存</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+                            </script>
+
+                            <script type="text/ng-template" id="showDimensionRatio.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <!--<div ui-grid="gridDimensionRatio" ui-grid-pagination ui-grid-selection class="grid"></div>-->
+                                    <li ng-repeat="dimensionRatio in dimensionRatios">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">{{dimensionRatio.ratioName}}</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" ng-model="dimensionRatio.ratio">
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" ng-click="saveAll()">调整加权系数</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+
+                            </script>
+
+                            <script type="text/ng-template" id="addComponent.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div ui-grid="gridComponent" ui-grid-pagination ui-grid-selection class="grid"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" ng-click="open()">添加配件</button>
+                                    <button class="btn btn-default" ng-click="remove()">删除配件</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+                            </script>
+                            <script type="text/ng-template" id="openComponent.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="inputText23" class="col-sm-2 control-label no-padding-right">配件</label>
+                                        <div class="col-sm-10">
+                                            <select  ng-model="component" ng-options="component.componentCode+'-'+component.componentName for component in components" id="inputText23" >
+                                                <option value="">Choose Component</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" ng-click="save()">保存</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                </div>
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

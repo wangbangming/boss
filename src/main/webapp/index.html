@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<!--
+    BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.4
+    Version: 1.4.1
+    Purchase: http://wrapbootstrap.com
+    -->
+
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app" ng-controller="AppCtrl">
+
+<!-- Head -->
+<head>
+	<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+	<meta HTTP-EQUIV="expires" CONTENT="0">
+    <meta charset="utf-8" />
+    <title page-title></title>
+
+    <meta name="description" content="blank page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!--Basic Styles-->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" /> <!--assets/css/bootstrap.min.css-->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" /> <!--assets/css/font-awesome.min.css-->
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.min.css" /> <!--assets/css/weather-icons.min.css-->
+
+    <!--Fonts-->
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300"
+          rel="stylesheet" type="text/css">-->
+
+    <link rel="stylesheet" href="bower_components/typicons/src/font/typicons.min.css" /> <!--assets/css/typicons.min.css-->
+    <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" /> <!--assets/css/animate.min.css-->
+
+    <!--Beyond styles-->
+    <link href="assets/css/beyond.min.css" rel="stylesheet" />
+    <link href="assets/css/demo.min.css" rel="stylesheet" />
+    <link ng-href="{{settings.skin}}" rel="stylesheet" type="text/css" />
+
+    <style>
+        .modal{
+            display: flex !important;
+            height: 100%;
+        }
+        .modal .modal-dialog{
+            margin: auto;
+        }
+    </style>
+
+    <script src="bower_components/modernizr/modernizr.js"></script>
+</head>
+<!-- /Head -->
+
+<!-- Body -->
+<body>
+<div ui-view></div>
+
+<!-- Scripts -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+
+<script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="bower_components/angular-touch/angular-touch.min.js"></script>
+
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+<script src="bower_components/angular-ui-utils/ui-utils.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.min.js"></script>
+<script src="bower_components/jquery.slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="lib/angular/angular-ngStorage/ngStorage.js"></script>
+
+<script>window.consoleLogDisabled = false;</script>
+<script src="lib/c.js"></script>
+
+<script src="lib/utilities.js"></script>
+
+<!-- App Config and Routing Scripts -->
+<script src="app/app.js"></script>
+<script src="app/config._global.js"></script>
+<script src="app/config.lazyload.js"></script>
+<script src="app/config.state._base.js"></script>
+<script src="app/config.state.app.dashboard.js"></script>
+<script src="app/config.state.app.databoxes.js"></script>
+<script src="app/config.state.app.widgets.js"></script>
+<script src="app/config.state.app.elements.js"></script>
+<script src="app/config.state.app.fontawesome.js"></script>
+<script src="app/config.state.app.glyphicons.js"></script>
+<script src="app/config.state.app.typicons.js"></script>
+<script src="app/config.state.app.weathericons.js"></script>
+<script src="app/config.state.app.tabs.js"></script>
+<script src="app/config.state.app.alerts.js"></script>
+<script src="app/config.state.app.supplier.js"></script>
+<script src="app/config.state.app.test.js"></script>
+<script src="app/config.state.app.maintainplan.js"></script>
+<script src="app/config.state.app.component.js"></script>
+<script src="app/config.state.app.modals.js"></script>
+<script src="app/config.state.app.buttons.js"></script>
+<script src="app/config.state.app.nestablelist.js"></script>
+<script src="app/config.state.app.treeview.js"></script>
+<script src="app/config.state.app.simpletables.js"></script>
+<script src="app/config.state.app.datatables.js"></script>
+<script src="app/config.state.app.formlayout.js"></script>
+<script src="app/config.state.app.forminputs.js"></script>
+<script src="app/config.state.app.formpickers.js"></script>
+<script src="app/config.state.app.formwizard.js"></script>
+<script src="app/config.state.app.formvalidation.js"></script>
+<script src="app/config.state.app.formeditors.js"></script>
+<script src="app/config.state.app.flot.js"></script>
+<script src="app/config.state.app.morris.js"></script>
+<script src="app/config.state.app.sparkline.js"></script>
+<script src="app/config.state.app.easypiechart.js"></script>
+<script src="app/config.state.app.chartjs.js"></script>
+<script src="app/config.state.app.profile.js"></script>
+<script src="app/config.state.app.inbox.js"></script>
+<script src="app/config.state.app.messageview.js"></script>
+<script src="app/config.state.app.messagecompose.js"></script>
+<script src="app/config.state.app.timeline.js"></script>
+<script src="app/config.state.app.pricing.js"></script>
+<script src="app/config.state.app.invoice.js"></script>
+<script src="app/config.state.app.typography.js"></script>
+<script src="app/config.state.app.blank.js"></script>
+<script src="app/config.state.app.grid.js"></script>
+<script src="app/config.state.app.mvc.js"></script>
+<script src="app/config.state.app.user.js"></script>
+<script src="app/config.state.app.role.js"></script>
+<script src="app/config.state.app.menu.js"></script>
+<script src="app/config.state.app.url.js"></script>
+
+<script src="app/run.js"></script>
+
+<script src="app/controller.app.settings.js"></script>
+
+
+<!-- Layout Related Directives -->
+<script src="app/directives/loading.js"></script>
+<script src="app/directives/skin.js"></script>
+<script src="app/directives/sidebar.js"></script>
+<script src="app/directives/header.js"></script>
+<script src="app/directives/navbar.js"></script>
+<script src="app/directives/chatbar.js"></script>
+<script src="app/directives/widget.js"></script>
+<script src="app/directives/sidebarmenu.js"></script>
+<script src="app/directives/buttonauth.js"></script>
+<script src="app/directives/myfocus.js"></script>
+<script src="app/directives/ensureunique.js"></script>
+<script src="app/directives/leftrightselect.js"></script>
+
+</body>
+<!--  /Body -->
+</html>

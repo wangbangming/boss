@@ -1,0 +1,11 @@
+{
+    "ous": {
+        "title": "OpenUsers",
+        "nbopenUsers": "There are {{ total }} openUsers.",
+        "filter": "Filter",
+        "table": {
+            "openId": "Open Id",
+            "nickName": "Nick Name"
+        }
+    }
+}

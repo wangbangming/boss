@@ -1,0 +1,72 @@
+[
+    {
+        "id": 10000000000101,
+        "supplierName": "供应商01",
+        "supplierEmail": "s01@163.com",
+        "contactName": "联系人01",
+        "contactPhone": "15618600101"
+    },
+    {
+        "id": 10000000000102,
+        "supplierName": "供应商02",
+        "supplierEmail": "s02@163.com",
+        "contactName": "联系人02",
+        "contactPhone": "15618600102"
+    },
+    {
+        "id": 10000000000103,
+        "supplierName": "供应商03",
+        "supplierEmail": "s03@163.com",
+        "contactName": "联系人03",
+        "contactPhone": "15618600103"
+    },
+    {
+        "id": 10000000000104,
+        "supplierName": "供应商04",
+        "supplierEmail": "s04@163.com",
+        "contactName": "联系人04",
+        "contactPhone": "15618600104"
+    },
+    {
+        "id": 10000000000105,
+        "supplierName": "供应商05",
+        "supplierEmail": "s05@163.com",
+        "contactName": "联系人05",
+        "contactPhone": "15618600105"
+    },
+    {
+        "id": 10000000000106,
+        "supplierName": "供应商06",
+        "supplierEmail": "s06@163.com",
+        "contactName": "联系人06",
+        "contactPhone": "15618600106"
+    },
+    {
+        "id": 10000000000107,
+        "supplierName": "供应商07",
+        "supplierEmail": "s07@163.com",
+        "contactName": "联系人07",
+        "contactPhone": "15618600107"
+    },
+    {
+        "id": 10000000000108,
+        "supplierName": "供应商08",
+        "supplierEmail": "s08@163.com",
+        "contactName": "联系人08",
+        "contactPhone": "15618600108"
+    },
+    {
+        "id": 10000000000109,
+        "supplierName": "供应商09",
+        "supplierEmail": "s09@163.com",
+        "contactName": "联系人09",
+        "contactPhone": "15618600109"
+    },
+    {
+        "id": 10000000000110,
+        "supplierName": "供应商10",
+        "supplierEmail": "s10@163.com",
+        "contactName": "联系人10",
+        "contactPhone": "15618600110"
+    }
+]

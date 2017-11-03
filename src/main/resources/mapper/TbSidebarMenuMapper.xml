@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boss.dao.TbSidebarMenuMapper">
+    <resultMap id="BaseResultMap" type="com.boss.entity.vo.TbSidebarMenu">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="ui_sref" jdbcType="VARCHAR" property="uiSref"/>
+        <result column="i_class" jdbcType="VARCHAR" property="iClass"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="menu_text" jdbcType="VARCHAR" property="menuText"/>
+        <result column="is_leaf" jdbcType="BIT" property="isLeaf"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="status" jdbcType="BIT" property="status"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="last_update_by" jdbcType="BIGINT" property="lastUpdateBy"/>
+        <result column="last_update_date" jdbcType="TIMESTAMP" property="lastUpdateDate"/>
+        <result column="row_version" jdbcType="INTEGER" property="rowVersion"/>
+        <result column="is_valid" jdbcType="BIT" property="isValid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, ui_sref, i_class, parent_id, menu_text, is_leaf, description, status, create_by, 
+    create_date, last_update_by, last_update_date, row_version, is_valid
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sidebar_menu
+        where id = #{id,jdbcType=BIGINT} AND IFNULL(is_valid, 1) = 1;
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_sidebar_menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.boss.entity.vo.TbSidebarMenu">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        insert into tb_sidebar_menu (id, ui_sref, i_class,
+        parent_id, menu_text, is_leaf,
+        description, status, create_by,
+        create_date, last_update_by, last_update_date,
+        row_version, is_valid)
+        values (#{id,jdbcType=BIGINT}, #{uiSref,jdbcType=VARCHAR}, #{iClass,jdbcType=VARCHAR},
+        #{parentId,jdbcType=BIGINT}, #{menuText,jdbcType=VARCHAR}, #{isLeaf,jdbcType=BIT},
+        #{description,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{createBy,jdbcType=BIGINT},
+        #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=BIGINT}, #{lastUpdateDate,jdbcType=TIMESTAMP},
+        #{rowVersion,jdbcType=INTEGER}, #{isValid,jdbcType=BIT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.boss.entity.vo.TbSidebarMenu">
+        insert into tb_sidebar_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uiSref != null">
+                ui_sref,
+            </if>
+            <if test="iClass != null">
+                i_class,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="menuText != null">
+                menu_text,
+            </if>
+            <if test="isLeaf != null">
+                is_leaf,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="lastUpdateBy != null">
+                last_update_by,
+            </if>
+            <if test="lastUpdateDate != null">
+                last_update_date,
+            </if>
+            <if test="rowVersion != null">
+                row_version,
+            </if>
+            <if test="isValid != null">
+                is_valid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="uiSref != null">
+                #{uiSref,jdbcType=VARCHAR},
+            </if>
+            <if test="iClass != null">
+                #{iClass,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="menuText != null">
+                #{menuText,jdbcType=VARCHAR},
+            </if>
+            <if test="isLeaf != null">
+                #{isLeaf,jdbcType=BIT},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateBy != null">
+                #{lastUpdateBy,jdbcType=BIGINT},
+            </if>
+            <if test="lastUpdateDate != null">
+                #{lastUpdateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rowVersion != null">
+                #{rowVersion,jdbcType=INTEGER},
+            </if>
+            <if test="isValid != null">
+                #{isValid,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.boss.entity.vo.TbSidebarMenu">
+        update tb_sidebar_menu
+        <set>
+            <if test="uiSref != null">
+                ui_sref = #{uiSref,jdbcType=VARCHAR},
+            </if>
+            <if test="iClass != null">
+                i_class = #{iClass,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="menuText != null">
+                menu_text = #{menuText,jdbcType=VARCHAR},
+            </if>
+            <if test="isLeaf != null">
+                is_leaf = #{isLeaf,jdbcType=BIT},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=BIT},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateBy != null">
+                last_update_by = #{lastUpdateBy,jdbcType=BIGINT},
+            </if>
+            <if test="lastUpdateDate != null">
+                last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rowVersion != null">
+                row_version = #{rowVersion,jdbcType=INTEGER},
+            </if>
+            <if test="isValid != null">
+                is_valid = #{isValid,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.boss.entity.vo.TbSidebarMenu">
+    update tb_sidebar_menu
+    set ui_sref = #{uiSref,jdbcType=VARCHAR},
+      i_class = #{iClass,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      menu_text = #{menuText,jdbcType=VARCHAR},
+      is_leaf = #{isLeaf,jdbcType=BIT},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_by = #{lastUpdateBy,jdbcType=BIGINT},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      row_version = #{rowVersion,jdbcType=INTEGER},
+      is_valid = #{isValid,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!-- 将外查询表的每一行，代入内查询作为检验，如果内查询返回的结果取非空值，则EXISTS子句返回TRUE，这一行行可作为外查询的结果行，否则不能作为结果 -->
+    <select id="findTbSidebarMenuListByParentIdUsingAuthority" resultMap="BaseResultMap">
+    select * from tb_sidebar_menu t where t.parent_id=#{parentId,jdbcType=BIGINT}
+    and IFNULL(t.is_valid, 1) = 1
+    and EXISTS(
+    select * from tb_sys_user u, tb_sys_role r, tr_sys_user_role ur, tr_sys_role_menu rm
+    where u.id=ur.user_id and r.id=ur.role_id and rm.role_id=r.id and rm.menu_id=t.id
+    and u.account=#{account,jdbcType=VARCHAR}
+    and IFNULL(u.is_valid, 1) = 1
+    and IFNULL(r.is_valid, 1) = 1
+    and IFNULL(ur.is_valid, 1) = 1
+    and IFNULL(rm.is_valid, 1) = 1
+    )
+  </select>
+
+    <select id="findTbSidebarMenuListByRoleId" resultMap="BaseResultMap">
+    select m.* from tb_sys_role r, tb_sidebar_menu m, tr_sys_role_menu rm
+    where rm.role_id = r.id
+    and rm.menu_id = m.id
+    and r.id = #{roleId, jdbcType=BIGINT}
+    and IFNULL(r.is_valid, 1) = 1
+    and IFNULL(m.is_valid, 1) = 1
+    and IFNULL(rm.is_valid, 1) = 1
+  </select>
+
+    <select id="findRootNode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tb_sidebar_menu WHERE parent_id IS NULL AND IFNULL(is_valid, 1) = 1;
+    </select>
+
+    <select id="findTbSidebarMenuListByParentId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tb_sidebar_menu WHERE
+        parent_id = #{parentId,jdbcType=BIGINT} AND IFNULL(is_valid, 1) = 1;
+    </select>
+
+    <select id="findTbSidebarMenuByMenuText" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tb_sidebar_menu WHERE
+        menu_text = #{menuText,jdbcType=VARCHAR} AND IFNULL(is_valid, 1) = 1;
+    </select>
+</mapper>

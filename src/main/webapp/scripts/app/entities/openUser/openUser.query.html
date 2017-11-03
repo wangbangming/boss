@@ -1,0 +1,21 @@
+<div>
+    <h2 translate="ous.title">OpenUsers</h2>
+
+    <p translate="ous.nbopenUsers" translate-values="{total: '{{ openUsers.length }}'}">There are {{ openUsers.length }} loggers.</p>
+
+    <table class="table table-condensed table-striped table-bordered table-responsive">
+        <thead>
+        <tr>
+            <th><span translate="ous.table.openId">openId</span></th>
+            <th><span translate="ous.table.nickName">nickName</span></th>
+        </tr>
+        </thead>
+
+        <tr ng-repeat="openUser in openUsers | filter:filter">
+            <td><small>{{openUser.openId | characters:140}}</small></td>
+            <td>
+                {{openUser.nickName}}
+            </td>
+        </tr>
+    </table>
+</div>

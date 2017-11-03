@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="well with-header">
+                    <div class="header bordered-pink">所有角色</div>
+                    <div class="buttons-preview">
+                        <div ng-controller="RoleCtrl">
+
+                            <h5 class="text-right">
+                                <button class="btn btn-default" ng-click="open('','modalContent.html', 'add')">新增角色</button>
+                                <button class="btn btn-default" ng-click="open('','modalContent.html', 'edit')">编辑角色</button>
+                                <button class="btn btn-default" ng-click="removeLine()">删除角色</button>
+                            </h5>
+
+                            <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection class="grid"></div>
+
+                            <script type="text/ng-template" id="modalContent.html">
+								<form name="form" class="form-horizontal" novalidate>
+                                	<div class="modal-header">
+                                    	<h3 class="modal-title">{{modalTitle}}</h3>
+                                	</div>
+                                	<div class="modal-body">
+
+                                        <div class="form-group">
+                                            <label for="inputText1" class="col-sm-2 control-label no-padding-right">角色编码</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" required class="form-control" id="inputText1" ng-model="role.roleCode"
+													ng-minlength="3" ng-maxlength="15" placeholder="合法的角色编码" name="roleCode" my-focus ensure-unique="roleCode" ensure-unique-data="role">
+                                                <p class="help-block">3至15个字符</p>
+												<div ng-show="form.roleCode.$invalid && (!form.roleCode.$focused || form.submitted)">
+													<small ng-show="form.roleCode.$error.required">
+															<font color="#FF0000">roleCode is required</font>
+													</small>
+													<small ng-show="form.roleCode.$error.minlength">
+															<font color="#FF0000">roleCode is required to be at least 3 characters</font>
+													</small>
+													<small ng-show="form.roleCode.$error.maxlength">
+															<font color="#FF0000">roleCode cannot be longer than 15 characters</font>
+													</small>
+													<small ng-show="form.roleCode.$error.unique">
+															<font color="#FF0000">That roleCode is taken, please try another</font>
+													</small>
+												</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputText2" class="col-sm-2 control-label no-padding-right">角色名</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" required class="form-control" id="inputText2" ng-model="role.roleName"
+													ng-minlength="2" ng-maxlength="15" placeholder="合法的角色名" name="roleName" my-focus>
+                                                <p class="help-block">2至15个字符</p>
+
+												<div ng-show="form.roleName.$invalid && (!form.roleName.$focused || form.submitted)">
+													<small ng-show="form.roleName.$error.required">
+															<font color="#FF0000">roleName is required</font>
+													</small>
+													<small ng-show="form.roleName.$error.minlength">
+															<font color="#FF0000">roleName is required to be at least 2 characters</font>
+													</small>
+													<small ng-show="form.roleName.$error.maxlength">
+															<font color="#FF0000">roleName cannot be longer than 15 characters</font>
+													</small>
+												</div>
+                                            </div>
+                                        </div>
+
+                                	</div>
+                                	<div class="modal-footer">
+                                    	<button class="btn btn-blue" ng-click="ok()" ng-bind="modalAction">保存</button>
+                                    	<button class="btn btn-warning" ng-click="cancel()">取消</button>
+                                	</div>
+								</form>
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

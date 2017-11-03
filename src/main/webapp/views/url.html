@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget radius-bordered">
+            <div class="well with-header">
+                <div class="header bordered-pink"><span class="widget-caption">所有后台URL</span></div>
+	            <div ng-controller="UrlCtrl">
+					<h5 class="text-right">
+	                    <button class="btn btn-default" ng-click="authorizeUrl2Role()">角色赋URL</button>
+	                </h5>
+	                <div class="row">
+	                    <div class="col-lg-6  col-md-6 col-sm-12">
+	                        <div class="padding-30">
+	                            <div class="bg-whitesmoke">
+		                            <div>
+										<ul z-tree-radio="role" class="ztree" id="roleTree" ng-model="roleSelected"></ul>
+									</div>
+								</div>
+	                        </div>
+	                    </div>
+	                    <div class="col-lg-6 col-md-6 col-sm-12">
+	                        <div class="padding-30">
+	                            <div class="bg-whitesmoke">
+	                                <div>
+										<ul z-tree="url" class="ztree" id="urlTree" linkage="roleSelected"></ul>
+									</div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+            </div>
+        </div>
+    </div>
+</div>

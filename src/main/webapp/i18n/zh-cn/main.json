@@ -1,0 +1,19 @@
+{
+    "main": {
+        "title": "欢迎!",
+        "subtitle": "SAFE2-Web应用演示",
+        "logged": {
+            "message": "您已登录，作为用户： \"{{username}}\"."
+        },
+        "question": "任何关于 JHipster 的问题，访问如下链接：",
+        "link": {
+            "homepage": "JHipster 主页",
+            "stackoverflow": "JHipster on Stack Overflow",
+            "bugtracker": "JHipster bug tracker",
+            "chat": "JHipster public chat room",
+            "contact": "contact @java_hipster on Twitter"
+        },
+        "like": "如果喜欢 JHipster, 别忘了点赞 ",
+        "github": "Github"
+    }
+}
